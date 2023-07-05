@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body class="loggedin">
+  <nav class="site-header sticky-top py-1">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2 d-none d-md-inline-block" href="{{ url_for('home') }}"><i class="fas fa-home"></i> Inicio</a>
+      <a class="py-2 d-none d-md-inline-block" href="{{ url_for('perfil') }}"><i class="fas fa-user-circle"></i>
+        Perfil</a>
+      <a class="py-2 d-none d-md-inline-block" href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i>
+        Salir</a>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-sm-2 d-none d-lg-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/registro_empleados">
+                <i class="fas fa-user"></i>
+                Empleados<span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/proveedor">
+                <i class="fas fa-truck"></i>
+                Proveedores
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/entrada_productos">
+                <i class="fas fa-cart-plus"></i>
+                Compras
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/productos">
+                <i class="fas fa-shopping-bag"></i>
+                Productos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/salida_productos">
+                <i class="fas fa-cart-arrow-down"></i>
+                Salida Productos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categoria">
+                <i class="fas fa-sticky-note"></i>
+                Categoria
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <div class="col-12">
+            {% block content %}{% endblock %}
+          </div>
+        </div>
+      </main>
+</body>
+
+<script>
+  const btnDelete = document.querySelectorAll('.btn-delete');
+  if (btnDelete) {
+    const btnArray = Array.from(btnDelete);
+    btnArray.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        if (!confirm('¿SEGURO DESEA ELIMINAR AL USUARIO?')) {
+          e.preventDefault();
+        }
+      });
+    })
+  }
+
+  $(document).ready(function () {
+    $('#example').DataTable({
+      "aLengthMenu": [[3, 5, 10, 25, -1], [3, 5, 10, 25, "All"]],
+      "iDisplayLength": 3
+    }
+    );
+  });
+
+</script>
+
+</html>

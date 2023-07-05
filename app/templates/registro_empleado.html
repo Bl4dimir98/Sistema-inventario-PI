@@ -1,0 +1,217 @@
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  {% block title %}Empleados{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+    id="bootstrap-css">
+  <link rel="stylesheet" href="npm i bootstrap-icons">
+</head>
+{% block content %}
+<style>
+  h4 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+  }
+
+  body {
+    background-color: #f0f5fe;
+  }
+
+  thead {
+    font-weight: bold;
+  }
+
+  thead,
+  tbody {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div class="row main">
+      <div class="main-login main-center">
+        <center>
+          <h5>Registrar nuevo usuario</h5>
+        </center>
+        <form action="{{ url_for('agregar_empleado') }}" method="post" autocomplete="off">
+          <div class="form-group">
+            <label for="name" class="cols-sm-2 control-label">Cedula</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="ValidaSoloNumeros()" name="cedula" id="cedula" onchange="validarCedula()" placeholder="cedula" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Primer Nombre</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="txNombres()" name="primer_nombre" id="primer_nombre"
+                  placeholder="Primer Nombre" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Segundo Nombre</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="txNombres()" name="segundo_nombre" id="segundo_nombre"
+                  placeholder="Segundo Nombre" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Primer Apellido</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="txNombres()" name="primer_apellido" id="primer_apellido"
+                  placeholder="Primer Apellido" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Segundo Apellido</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="txNombres()" name="segundo_apellido" id="segundo_apellido"
+                  placeholder="Segundo Apellido" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Direccion</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-home fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Teléfono</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="ValidaSoloNumeros()" name="telefono" id="telefono" placeholder="Telefono" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Email</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Correo" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="cols-sm-2 control-label">Contraseña</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                <input type="password" class="form-control" name="contrasena" id="contrasena" required
+                  placeholder="Cree una contraseña" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="cols-sm-2 control-label">Tipo usuario</label>
+            <div class="cols-sm-10">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-user-plus" aria-hidden="true"></i></span>
+                <input type="text" class="form-control" onkeypress="txNombres()" name="tipo_usuario" id="tipo_usuario"
+                  placeholder="Tipo Usuario" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group ">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <input type="submit" value="Guardar" class="form-control btn btn-success">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="col-md-8">
+    <table id="example" class="table table-secondary table-hover table-striped"
+      style="text-align: center">
+      <thead class="table-secondary">
+        <tr>
+          <td>ID</td>
+          <td>Cédula</td>
+          <td>Primer Nombre</td>
+          <td>Segundo Nombre</td>
+          <td>Primer Apellido</td>
+          <td>Segundo Apellido</td>
+          <td>Dirección</td>
+          <td>Teléfono</td>
+          <td>Email</td>
+          <td>Rol</td>
+          <td>Opción</td>
+        </tr>
+      </thead>
+      <tbody class="table table-bordered border-success">
+        {% for row in list_users %}
+        <tr>
+          <td>{{row[0]}}</td>
+          <td>{{row[1]}}</td>
+          <td>{{row[2]}}</td>
+          <td>{{row[3]}}</td>
+          <td>{{row[4]}}</td>
+          <td>{{row[5]}}</td>
+          <td>{{row[6]}}</td>
+          <td>{{row[7]}}</td>
+          <td>{{row[8]}}</td>
+          <td>{{row[10]}}</td>
+          <td width="130">
+            <a href="/edit/{{row[0]}}" class="btn btn-secondary btn-sm">EDITAR</a>
+            <a href="/delete/{{row[0]}}" class="btn btn-danger btn-sm btn-delete">ELIMAR</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="../static/scripts/validar-cadula.js"></script>
+</body>
+{% endblock %}
+
+</html>

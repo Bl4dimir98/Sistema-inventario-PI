@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        color: #1e773a;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    table,
+    p {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 18px;
+    }
+    
+</style>
+<h1>PERFIL</h1>
+<div>
+    <p>Los datos de tu cuenta son los siguientes:</p>
+    <table>
+        <tr>
+            <td>Cédula: </td>
+            <td> {{ account['cedula'] }}</td>
+        </tr>
+        <tr>
+            <td>Nombre: </td>
+            <td> {{ account['primer_nombre'] }} {{ account['primer_apellido'] }}</td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td> {{ account['email'] }}</td>
+        </tr>
+        <tr>
+            <td>Rol: </td>
+            <td> {{ account['tipo_usuario'] }}</td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

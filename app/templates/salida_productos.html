@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+{% block title %}Salida de Productos{% endblock %}
+{% block content %}
+<style>
+    h3 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 23px;
+        color: #1e773a;
+    }
+
+    body {
+        background-color: #f0f5fe;
+      }
+
+    form {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    thead {
+        font-weight: bold;
+    }
+
+    thead,
+    tbody {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: smaller;
+    }
+</style>
+
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="card card-body card border-secondary bg-light">
+                <form action="{{url_for('add_salidaproductos')}}" method="POST">
+                    <center>
+                        <h3>Salida de productos</h3>
+                    </center>
+                    <div class="form-group">
+                        <label for="" class="form-label">No de Factura</label>
+                        <input type="number" class="form-control" name="id_venta" placeholder="&#35; ID venta">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Ingrese la fecha de venta</label>
+                        <input type="date" class="form-control" name="fechaventa" placeholder="Fecha de venta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Precio</label>
+                        <input type="number" step="any" class="form-control" name="precioventa"
+                            placeholder="&#65284; Ingrese el precio de venta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" name="cantidad" placeholder="&#128722; Ingrese la cantidad de productos vendidos" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Seleccione un producto</label>
+                        <select name="estados" class="form-control">
+                            <p>Escoja el producto</p>
+                            {% for row in list_cproductos%}
+                            <option name="estadoss" class="form-control" value="{{row[0]}}">{{row[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                        GUARDAR
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- AQUI SE COMINSA-->
+        <div class="col-md-8">
+            <table id="example" class="table table-secondary table-hover table-striped"
+                style="text-align: center">
+                <thead class="table-secondary">
+                    <tr>
+                        <td>ID</td>
+                        <td>Fecha de venta</td>
+                        <td>P.V.P</td>
+                        <td>Cantidad</td>
+                        <td>Producto</td>
+                    </tr>
+                </thead>
+                <tbody class="table table-bordered border-success">
+                    {% for row in list_productos%}
+                    <tr class="align-middle">
+                        <td>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>{{row[3]}}</td>
+                        <td>{{row[4]}}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+{% endblock %}

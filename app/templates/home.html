@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<style>
+    p {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 18px;
+
+    }
+
+    h1 {
+        color: #1e773a;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+</style>
+
+<main>
+    <h1>¡Buenos días!</h1>
+    <p>¡Bienvenido de nuevo {{ username }}!</p>
+</main>
+{% endblock %}

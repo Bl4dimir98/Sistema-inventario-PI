@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}Editar Proveedor{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f5fe;
+      }
+
+    h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 23px;
+        color: #E8630A;
+    }
+
+    form {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: smaller;
+    }
+</style>
+<body>
+    <br>
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <div class="card card-body card border-secondary bg-light">
+                <form action="/update_proveedor/{{proveedor.id}}" method="POST">
+                    <h4>Actualizar Información</h4>
+                    <div class="form-group">
+                        <input type="text" name="ruc" value="{{proveedor.ruc}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="nombre" value="{{proveedor.nombre}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="direccion" value="{{proveedor.direccion}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="correo" value="{{proveedor.correo}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="telefono" value="{{proveedor.telefono}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

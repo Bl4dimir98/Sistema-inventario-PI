@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}Editar Categoria{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f5fe;
+      }
+
+    h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 23px;
+        color: #EB6440;
+    }
+
+    form {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    p{
+        text-align: center;
+        font-size: 15px;
+    }
+</style>
+<br>
+<body>
+    <div class="row">
+        <div class="col-md-6 offset-md-2">
+            <div class="card card-body card border-light bg-light">
+                <form action="/update_categoria/{{categoria.id_categoria}}" method="POST">
+                    <h4>Actualizar Información</h4>
+                    <div class="form-group">
+                        <p>Ingrese el nombre de la categoria</p>
+                        <input type="text" name="nombre" value="{{categoria.nombre_categoria}}" class="form-control"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-warning btn-block">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

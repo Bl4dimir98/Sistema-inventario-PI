@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block title %}Editar Empleado{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #f0f5fe;
+    }
+
+    form {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: smaller;
+    }
+
+    h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 23px;
+        color: #1e773a;
+    }
+</style>
+
+<body>
+    <div class="row">
+        <div class="col-md-5 offset-md-3">
+            <div class="card card-body card border-secondary bg-light">
+                <form action="/update_empleados/{{empleados.id}}" method="POST">
+                    <h4>Actualizar Información</h4>
+                    <div class="form-group">
+                        <input type="text" name="cedula" value="{{empleados.cedula}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="primer_nombre" value="{{empleados.primer_nombre}}"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="segundo_nombre" value="{{empleados.segundo_nombre}}"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="primer_apellido" value="{{empleados.primer_apellido}}"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="segundo_apellido" value="{{empleados.segundo_apellido}}"
+                            class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="direccion" value="{{empleados.direccion}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="telefono" value="{{empleados.telefono}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" value="{{empleados.email}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="contrasena" value="{{empleados.contrasena}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="tipo_usuario" value="{{empleados.tipo_usuario}}" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register-user.css') }}">
+
+{% block title %}Empleados{% endblock %}
+
+{% block content %}
+<main>
+    <div class="input-contenedor">
+        <a href="{{ 'mostrar_empleados' }}">
+            <button aria-readonly="Ver Usuarios"><i class="fa-solid fa-user icon"></i> VER USUARIOS</button></a>
+    </div>
+    <div class="row" id="container-row">
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="card card-body card border-secondary bg-light">
+                <form action="{{ url_for('agregar_empleado') }}" method="POST">
+                    <center>
+                        <h4 style="color: #1e773a;">Registrar nuevo usuario</h4>
+                    </center>
+                    <div class="form-group">
+                        <label for="" class="form-label">Cedula</label>
+                        <input type="text" class="form-control" name="cedula" id="cedula"
+                            placeholder="&#128100; No de cédula" onchange="validarCedula()" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="primer_nombre" class="form-label">Primer Nombre</label>
+                        <input type="text" class="form-control" name="primer_nombre" id="primer_nombre"
+                            placeholder="&#128100; Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="segundo_nombre" class="form-label">Segundo Nombre</label>
+                        <input type="text" class="form-control" name="segundo_nombre" id="segundo_nombre"
+                            placeholder="&#128100; Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="primer_apellido" class="form-label">Primer Apellido</label>
+                        <input type="text" class="form-control" name="primer_apellido" id="primer_apellido"
+                            placeholder="&#128100; Primer apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="segundo_apellido" class="form-label">Segundo Apellido</label>
+                        <input type="text" class="form-control" name="segundo_apellido" id="segundo_apellido"
+                            placeholder="&#128100; Segundo Apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="direccion" id="direccion"
+                            placeholder="&#127969; Ingrese la dirección" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" name="telefono" id="telefono"
+                            placeholder="&#128222; Teléfono" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Correo</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="&#9993; Correo Electrónico"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contrasena" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" name="contrasena" id="contrasena"
+                            placeholder="&#128272; Cree una contraseña nueva" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo_usuario" class="form-label">Tipo de usuario</label>
+                        <input type="text" class="form-control" name="tipo_usuario" id="tipo_usuario"
+                            placeholder="&#128100; Administrador" required>
+                    </div>
+                    <button class="btn btn-primary  btn-block">
+                        GUARDAR
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-8">
+        <table id="example" class="table table-secondary table-hover table-striped" style="text-align: center">
+            <thead class="table-secondary">
+                <tr>
+                    <td>ID</td>
+                    <td>Cédula</td>
+                    <td>Primer Nombre</td>
+                    <td>Segundo Nombre</td>
+                    <td>Primer Apellido</td>
+                    <td>Segundo Apellido</td>
+                    <td>Dirección</td>
+                    <td>Teléfono</td>
+                    <td>Email</td>
+                    <td>Rol</td>
+                    <td>Opción</td>
+                </tr>
+            </thead>
+            <tbody class="table table-bordered border-success">
+                {% for row in list_users %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[10]}}</td>
+                    <td width="130">
+                        <a href="/edit/{{row[0]}}" class="btn btn-secondary btn-sm">EDITAR</a>
+                        <a href="/delete/{{row[0]}}" class="btn btn-danger btn-sm btn-delete">ELIMAR</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/scripts/validar-cadula.js"></script>
+</main>
+{% endblock %}

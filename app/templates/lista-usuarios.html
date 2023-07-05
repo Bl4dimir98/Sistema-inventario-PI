@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/register-user.css') }}"> -->
+
+{% block title %}Lista de Empleados{% endblock %}
+
+{% block content %}
+<main>
+    <br>
+    <div class="col-md-8">
+        <table id="example" class="table table-secondary table-hover table-striped" style="text-align: center">
+            <thead class="table-secondary">
+                <tr>
+                    <td>ID</td>
+                    <td>Cédula</td>
+                    <td>Primer Nombre</td>
+                    <td>Segundo Nombre</td>
+                    <td>Primer Apellido</td>
+                    <td>Segundo Apellido</td>
+                    <td>Dirección</td>
+                    <td>Teléfono</td>
+                    <td>Email</td>
+                    <td>Rol</td>
+                    <td>Opción</td>
+                </tr>
+            </thead>
+            <tbody class="table table-bordered border-success">
+                {% for row in list_users %}
+                <tr>
+                    <td>{{row[0]}}</td>
+                    <td>{{row[1]}}</td>
+                    <td>{{row[2]}}</td>
+                    <td>{{row[3]}}</td>
+                    <td>{{row[4]}}</td>
+                    <td>{{row[5]}}</td>
+                    <td>{{row[6]}}</td>
+                    <td>{{row[7]}}</td>
+                    <td>{{row[8]}}</td>
+                    <td>{{row[10]}}</td>
+                    <td width="130">
+                        <a href="/edit/{{row[0]}}" class="btn btn-secondary btn-sm">EDITAR</a>
+                        <a href="/delete/{{row[0]}}" class="btn btn-danger btn-sm btn-delete">ELIMAR</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../static/scripts/validar-cadula.js"></script>
+</main>
+{% endblock %}

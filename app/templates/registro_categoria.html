@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block title %}Categoria{% endblock %}
+{% block content %}
+<style>
+    h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 23px;
+        color: #1e773a;
+    }
+
+    body {
+        background-color: #f0f5fe;
+      }
+
+    form {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    thead {
+        font-weight: bold;
+    }
+
+    thead,
+    tbody {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: smaller;
+    }
+</style>
+
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="card card-body card border-secondary bg-light">
+                <form action="{{url_for('add_categoria')}}" method="POST">
+                    <center>
+                        <h4>Registro Categoria</h4>
+                    </center>
+                    <div class="form-group">
+                        <p>Ingrese el codigo de la categoria</p>
+                        <input type="number" class="form-control" name="id" placeholder="&#35; ID" required>
+                    </div>
+                    <div class="form-group">
+                        <p>Ingrese el nombre de la categoria</p>
+                        <input type="text" class="form-control" name="nombre" placeholder="&#128722; Nombre" required>
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                        GUARDAR
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- AQUI SE COMINSA-->
+        <div class="col-md-8">
+            <table id="example" class="table table-secondary table-hover table-striped"
+                style="text-align: center">
+                <thead class="table-secondary">
+                    <tr>
+                        <td>ID</td>
+                        <td>Nombre/Descripción</td>
+                        <td>Opciones</td>
+                    </tr>
+                </thead>
+                <tbody class="table table-bordered border-success">
+                    {% for row in list_cate%}
+                    <tr class="align-middle">
+                        <td>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                        <td width="130">
+                            <a href="/edit_categoria/{{row[0]}}" class="btn btn-secondary btn-sm">EDITAR</a>
+                            <a href="/delete_categoria/{{row[0]}}" class="btn btn-danger btn-delete btn-sm">ELIMAR</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+{% endblock %}

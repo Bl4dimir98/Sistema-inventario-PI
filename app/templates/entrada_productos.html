@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+{% block title %}Entrada de Productos{% endblock %}
+{% block content %}
+<style>
+    h4 {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        font-size: 23px;
+        color: #1e773a;
+    }
+
+    form {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background-color: #f0f5fe;
+    }
+
+    thead {
+        font-weight: bold;
+    }
+
+    thead,
+    tbody {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: smaller;
+    }
+</style>
+
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="card card-body card border-secondary bg-light">
+                <form action="{{url_for('add_entrada_productos')}}" method="POST">
+                    <h4>Entrada de productos</h4>
+                    <div class="form-group">
+                        <label for="" class="form-label">Compra No:</label>
+                        <input type="number" class="form-control" name="id_compra"
+                            placeholder="&#35; Ingrese No de compra" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Fecha de compra</label>
+                        <input type="date" class="form-control" name="fecha_compra" placeholder="Fecha de compra"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Precio de compra</label>
+                        <input type="number" step="any" class="form-control" name="precio_compra"
+                            placeholder="&#128178; Precio de compra" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Cantidad de productos que ingresan</label>
+                        <input type="number" class="form-control" name="cantidad" placeholder="&#128722; Cantidad"
+                            required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Seleccione el producto</label>
+                    </div>
+                    <div class="form-group">
+                        <select name="estados" class="form-control">
+                            {% for row in list_cproductos %}
+                            <option name="estadoss" class="form-control" value="{{row[0]}}">{{row[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Seleccione el Proveedor</label>
+                    </div>
+                    <div class="form-group">
+                        <select name="mproveedor" class="form-control">
+                            {% for row in list_pproveedor %}
+                            <option name="estadoss" class="form-control" value="{{row[0]}}">{{row[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Seleccione el Usuario</label>
+                    </div>
+                    <div class="form-group">
+                        <select name="musuario" class="form-control">
+                            {% for row in list_uuser %}
+                            <option name="estadoss" class="form-control" value="{{row[0]}}">{{row[1]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                        GUARDAR
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- MOSTRAR -->
+        <div class="col-md-8">
+            <table id="example" class="table table-secondary table-hover table-striped" style="text-align: center">
+                <thead class="table-secondary">
+                    <tr>
+                        <td>ID</td>
+                        <td>Fecha de compra</td>
+                        <td>Precio de compra</td>
+                        <td>Cantidad</td>
+                        <td>Producto/Descripción</td>
+                        <td>Proveedor</td>
+                        <td>Usuario</td>
+                    </tr>
+                </thead>
+                <tbody class="table table-bordered border-success">
+                    {% for row in list_productos%}
+                    <tr class="align-middle">
+                        <td>{{row[0]}}</td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                        <td>{{row[3]}}</td>
+                        <td>{{row[4]}}</td>
+                        <td>{{row[5]}}</td>
+                        <td>{{row[6]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+<script>
+    function validarLetrasNumeros(cadena) {
+        var regex = /^[a-zA-Z0-9]+$/;
+        return regex.test(cadena);
+    }
+
+    // Ejemplo de uso:
+    var input = "Abc123";
+    if (validarLetrasNumeros(input)) {
+        console.log("La cadena contiene solo letras y números.");
+    } else {
+        console.log("La cadena contiene caracteres no válidos.");
+    }
+</script>
+{% endblock %}
